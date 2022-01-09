@@ -1,0 +1,43 @@
+#canv, #canvBox {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
+}
+
+#canv{
+	background-color: rgb(50,50,50);
+	border-radius: 32px;
+}
+
+#canvBox{
+	width: 672px;
+	height: 672px;
+	background-color: rgb(15,15,15);
+	border-radius: 48px;
+}
+
+h1, h6, p{
+	text-align: center;
+	color: white;
+	font-family: helvetica;
+	font-weight: bold;
+}
+h1{
+	font-size: 70px;
+	padding-top: 32px;
+	
+}
+h6{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	float: auto;
+}
+
+body{
+	background-color: rgb(25,25,25);
+}
