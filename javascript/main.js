@@ -213,7 +213,7 @@ function update(){
 	
 	// draw GUI
 	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].draw();
-	for(let i = 0; i < GUI_Player.length; i++) GUI_Player[i].draw();
+	if(!marketEnabled()) for(let i = 0; i < GUI_Player.length; i++) GUI_Player[i].draw();
 }
 
 // check if any of the market GUIs are enabled
