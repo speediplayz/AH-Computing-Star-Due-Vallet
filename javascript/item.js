@@ -11,6 +11,7 @@ class Item{
 		this.cost = cost;
 	}
 	
+	// used for debugging
 	debug(c){
 		c.lineWidth = 1;
 		c.strokeStyle = this.getItemColor();
@@ -20,10 +21,12 @@ class Item{
 		c.stroke();
 	}
 
+	// draw item to screen
 	draw(c){
 		c.drawImage(this.#getItemImage(), this.pos.x, this.pos.y);
 	}
 	
+	// return a duplicate item
 	clone(){
 		let item = new Item(this.id, this.name, this.stackCount, this.compostVal, this.uses, this.value, this.cost);
 		item.pos = this.pos.clone();
@@ -31,16 +34,19 @@ class Item{
 		return item;
 	}
 	
+	// return a duplicate item at a specific position
 	cloneAt(pos){
 		let item = new Item(this.id, this.name, this.stackCount, this.compostVal, this.uses, this.value, this.cost);
 		item.pos = pos;
 		return item;
 	}
 	
+	// get mid point of rect
 	getMidPoint(){
 		return new Vector2(this.pos.x + this.size.x/2, this.pos.y + this.size.y/2);
 	}
 	
+	// private function to get render image
 	#getItemImage(){
 		switch(this.id){
 			case  0: return tile_null;
@@ -63,6 +69,8 @@ class Item{
 		return tile_null;
 	}
 
+	// get item color
+	// I dont think this is used anymore
 	getItemColor(){
 		switch(this.id){
 			case  0: return "rgb(255,255,255)";
@@ -84,9 +92,8 @@ class Item{
 		}
 		return "rgb(255,0,255)";
 	}
-	
-	// statics
-	
+
+	// get item from ID
 	static getItemByID(id){
 		switch(id){
 			case  0: return new Item( 0, "SDV_EMPTY",        1, -1,   -1,  0, -1);

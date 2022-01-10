@@ -12,6 +12,7 @@ class Particle{
         
         this.particles = new Array(size);
 
+        // initialize particles
         for(let i = 0; i < this.particles.length; i++){
             let p = pos.clone();
             let v = Vector2.random(Math.random() * (speed.y-speed.x) + speed.x);
@@ -20,20 +21,25 @@ class Particle{
     }
 
     update(){
+        // loop over all particles
         for(let i = 0; i < this.particles.length; i++){
             let p = this.particles[i];
+            // delete if the currentl particle has expired
             if(new Date().getTime() > p.init + this.duration){
                 this.particles.splice(i, 1);
                 i--;
             }
+            // update position and velocity
             p.pos.add(p.vel)
             p.vel.multiply(p.drag);
         }
     }
 
     draw(c){
+        // loop over all particles
         for(let i = 0; i < this.particles.length; i++){
             let p = this.particles[i];
+            // draw current particle to screen
             c.fillStyle = p.col;
             c.beginPath();
             c.arc(p.pos.x, p.pos.y, p.rad, 0, 2 * Math.PI);

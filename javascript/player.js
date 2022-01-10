@@ -5,7 +5,7 @@ class Player{
 		this.item = Item.getItemByID(0);
 		this.coins = 0;
 	}
-	
+
 	collide(coll){
 		// deltas in every direction
 		let dt = {m:this.pos.y + this.size.y - coll.pos.y,d:new Vector2( 0, -1)};
@@ -20,9 +20,10 @@ class Player{
 	}
 	
 	interactMarket(market){
-		// market
+		// distance to market
 		let marketDist = Vector2.distance(this.getMidPoint(), market.getMidPoint());
 		if(marketDist < market.range){
+			// enable market if its within radius
 			GUI_Market[0].enabled = true;
 			return {act:true,del:false,drop:undefined};
 		}
@@ -31,6 +32,7 @@ class Player{
 
 	interactItem(item, waterwell, composter, soil){
 		
+		// drop item if shift is pressed
 		if(keys["shift"] && this.item.id != 0){
 			let dropped = this.item.clone();
 			dropped.pos = Vector2.add(this.pos, new Vector2(8, 8));
@@ -64,6 +66,7 @@ class Player{
 			
 			// watering can
 			if(id >= 12 && id <= 14 && this.item.uses > 0){
+				// can range based on level
 				let canRange = 	id == 12 ? 16 :
 								id == 13 ? 24 :
 								id == 14 ? 32 : 0;
@@ -71,10 +74,12 @@ class Player{
 				for(let i = 0; i < soil.length; i++){
 					let soilDist = Vector2.distance(soil[i].getMidPoint(), this.getMidPoint());
 					if(soilDist < canRange){
+						// water plot if its within range
 						if(soil[i].plantedID != -1 && !soil[i].watered) soil[i].timer.start();
 						soil[i].watered = true;
 					}
 				}
+				// reduce uses and spawn particle
 				this.item.uses--;
 				let particle = new Particle(this.getMidPoint(), canRange, new Vector2(1, canRange/4), 0.75, 2, "rgb(0,0,255,0.25)", 625);
 				particles.push(particle);
@@ -90,6 +95,7 @@ class Player{
 				let closestDist = result.dist;
 				
 				if(closestIndex >= 0 && closestDist < soil[closestIndex].range && soil[closestIndex].plantedID == -1){
+					// if closest soil is within range, pick up soil
 					soil.splice(closestIndex, 1);
 					let dropped = this.item.clone();
 					dropped.pos = Vector2.add(this.pos, new Vector2(8, 8));
@@ -104,8 +110,8 @@ class Player{
 			// soil
 			if(id == 11){
 				let plotPos = this.pos.clone();
+				// lock to grid
 				if(keys["capslock"]){
-					// lock to grid
 					let mid = this.getMidPoint();
 					plotPos.x = mid.x - mid.x % 32;
 					plotPos.y = mid.y - mid.y % 32;
@@ -194,14 +200,17 @@ class Player{
 		return {act:false,del:false,drop:undefined};
 	}
 	
+	// get mid point of rect
 	getMidPoint(){
 		return new Vector2(this.pos.x + this.size.x/2, this.pos.y + this.size.y/2);
 	}
 	
+	// move player by delta
 	move(delta){
 		this.pos.add(delta);
 	}
 	
+	// draw player to screen
 	draw(c){
 		c.lineWidth = 1;
 		c.strokeStyle = "black";
@@ -209,6 +218,7 @@ class Player{
 		c.strokeRect(this.getMidPoint().x-2, this.getMidPoint().y-2, 4, 4);
 	}
 	
+	// private function to find closest existing soil
 	#getClosestSoil(){
 		if(soil.length == 0) return {index:-1, dist:65535};
 		let closestIndex = -1;

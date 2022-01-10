@@ -12,6 +12,7 @@ class Soil{
 		this.timer.addInteractable(this);
 	}
 	
+	// update state of soil when planted
 	plantCrop(id){
 		this.plantedID = id;
 		this.grown = false;
@@ -19,23 +20,31 @@ class Soil{
 		this.timer.setInterval(this.#getGrowTime());
 	}
 	
+	// private update function
 	#updateCrop(timer){
+		// get plot from local timer interactables
 		let plot = timer.getInteractable(0);
 		if(plot.watered){
+			// increase grow stage
 			plot.growStage++;
 			if(plot.growStage == 3){
+				// reset growth stage
 				plot.growStage = 0;
+				// set crop to grown state
 				plot.plantedID++;
 				plot.grown = true;
+				// stop timer from unnecessary ticking
 				timer.stop();
 			}
 		}
 	}
 	
+	// get mid point of rect
 	getMidPoint(){
 		return new Vector2(this.pos.x + this.size.x/2, this.pos.y + this.size.y/2);
 	}
 
+	// draw soil to screen
 	draw(c){
 		c.drawImage(util_soil[this.watered?1:0], this.pos.x, this.pos.y);
 		if(this.plantedID == -1) return;
@@ -43,6 +52,7 @@ class Soil{
 		c.drawImage(this.#getCropImage(), mid.x-8, mid.y-8);
 	}
 	
+	// used for debugging
 	debug(c){
 		c.drawImage(util_soil[this.watered?1:0], this.pos.x, this.pos.y);
 		let mid = this.getMidPoint();
@@ -58,6 +68,7 @@ class Soil{
 		}
 	}
 	
+	// private function to get crop state
 	#getCropImage(){
 		switch(this.plantedID){
 			case  1: return tile_0_2;
@@ -74,6 +85,7 @@ class Soil{
 		return tile_null;
 	}
 
+	// private function to get growth time
 	#getGrowTime(){
 		switch(this.plantedID){
 			case 1: return 20000;

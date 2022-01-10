@@ -44,7 +44,7 @@ let util_soil = [ loadImage("img/util/util_soil_dry.png"), loadImage("img/util/u
 
 let map_default = loadImage("img/map/map_default.png");
 
-// functions
+// load image from directory
 function loadImage(src){
 	let image = new Image();
 	image.src = src;

@@ -1,9 +1,8 @@
+// has to be initialized here so they exist when they get called later on
 let ctx = document.getElementById("canv").getContext("2d");
 let player = new Player(new Vector2(128, 128), new Vector2(32, 32));
 
-// 0, 123, 140
-// 0, 112, 127
-
+// market GUI pages
 let GUI_Market = [
 	new Display // tools
 	(
@@ -159,20 +158,24 @@ let GUI_Market = [
 	)
 ];
 
+// page 1 buy, sell, next page
 GUI_Market[0].elements[0].onclick.push(()=>{ for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
 GUI_Market[0].elements[1].onclick.push(()=>{ player.coins += player.item.value; player.item = Item.getItemByID(0); for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
 GUI_Market[0].elements[8].onclick.push(()=>{ GUI_Market[0].enabled = false; GUI_Market[1].enabled = true; });
 
+// page 2 buy, sell, prev page
 GUI_Market[1].elements[0].onclick.push(()=>{ for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
 GUI_Market[1].elements[1].onclick.push(()=>{ player.coins += player.item.value; player.item = Item.getItemByID(0); for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
 GUI_Market[1].elements[7].onclick.push(()=>{ GUI_Market[0].enabled = true; GUI_Market[1].enabled = false; });
 
+// page 1 button events
 GUI_Market[0].elements[2].onclick.push(()=>{ let item = Item.getItemByID(12); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });
 GUI_Market[0].elements[3].onclick.push(()=>{ let item = Item.getItemByID(13); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });
 GUI_Market[0].elements[4].onclick.push(()=>{ let item = Item.getItemByID(14); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });
 GUI_Market[0].elements[5].onclick.push(()=>{ let item = Item.getItemByID(15); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });
 GUI_Market[0].elements[6].onclick.push(()=>{ let item = Item.getItemByID(11); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });
 
+// page 2 button events
 GUI_Market[1].elements[2].onclick.push(()=>{ let item = Item.getItemByID(1); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });
 GUI_Market[1].elements[3].onclick.push(()=>{ let item = Item.getItemByID(3); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });
 GUI_Market[1].elements[4].onclick.push(()=>{ let item = Item.getItemByID(5); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); closeMarket(); } });

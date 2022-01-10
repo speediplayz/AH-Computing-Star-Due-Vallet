@@ -1,3 +1,4 @@
+// events and listeners
 document.addEventListener("keydown", onKeyDownEvent);
 document.addEventListener("keyup", onKeyUpEvent);
 window.addEventListener("load", setup);
@@ -88,7 +89,7 @@ function setup(){
 	items[0].stackCount = 10;
 	items[1].stackCount = 10;
 	
-	// makes images look shit when true
+	// makes images look bad when true
 	ctx.imageSmoothingEnabled = false;
 	
 	start();
@@ -118,6 +119,7 @@ function start(){
 	requestAnimationFrame(start);
 }
 
+// main game update loop
 function update(){
 	// user input
 	if(keys["escape"]) closeMarket();
@@ -127,13 +129,14 @@ function update(){
 		if(keys["a"]) player.move(new Vector2(-moveSpeed, 0));
 		if(keys["d"]) player.move(new Vector2( moveSpeed, 0));
 		
-		// i dont know what the fuck this is
+		// i dont know what the hell this is
 		// but it caused me so many problems
 		// and i spent probably over an hour
 		// dealing with bugs related to this
 		if(keys[" "] && !itemAction){
 			if(items.length > 0){
 				for(let i = 0; i < items.length; i++){
+					// result from interaction
 					let result = player.interactItem(items[i], waterwell, composter, soil);
 					if(result.del){
 						items[i].stackCount--;
@@ -147,9 +150,11 @@ function update(){
 				}
 			}
 			else {
+				// result from interaction
 				let result = player.interactItem(player.item, waterwell, composter, soil);
 				if(result.drop != undefined) items.push(result.drop);
 			}
+			// interact with the market
 			player.interactMarket(market);
 			itemAction = true;
 		}
@@ -168,20 +173,27 @@ function update(){
 	
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	ctx.drawImage(map_default, 0, 0);
-	
-	/*
-		temp code
-	*/
-	
+
+	// game physics, updates and rendering
+
+	// collision with bounds
 	for(let i = 0; i < colliders.length; i++) player.collide(colliders[i]);
+
+	// draw soil plots
 	for(let i = 0; i < soil.length; i++) soil[i].draw(ctx);
+
+	// draw items
 	for(let i = 0; i < items.length; i++) items[i].draw(ctx);
 	
+	// draw structures
 	waterwell.draw(ctx, util_waterwell);
 	composter.draw(ctx, util_composter[Math.floor(composter.progress*5)]);
 	market.draw(ctx, util_market);
+
+	// draw player
 	player.draw(ctx);
 
+	// draw and update particles
 	for(let i = 0; i < particles.length; i++){
 		if(particles[i].particles.length == 0){
 			particles.splice(i, 1);
@@ -193,10 +205,6 @@ function update(){
 		}
 	}
 	
-	/*
-		end temp code
-	*/
-	
 	// restore canvas to default
 	ctx.restore();
 	
@@ -204,27 +212,31 @@ function update(){
 	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].draw();
 }
 
+// check if any of the market GUIs are enabled
 function marketEnabled(){
 
 	for(let i = 0; i < GUI_Market.length; i++) if(GUI_Market[i].enabled) return true;
 	return false;
 }
 
+// disable all market GUIs
 function closeMarket(){
 	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false;
 }
 
+// standard aabb rectangle overlap detection
 function aabbOverlap(ap, ab, bp, bb){
-	// aabb rectangle collision detection
 	return ap.x + ab.x > bp.x && ap.x < bp.x + bb.x && ap.y + ab.y > bp.y && ap.y < bp.y + bb.y;
 }
 
+// triggered when key is pressed down
 function onKeyDownEvent(e){
 	if(e.key.toLowerCase() == "capslock") { keys["capslock"] = !keys["capslock"]; return; }
 	// set key pressed at key index to true
 	keys[e.key.toLowerCase()] = true;
 }
 
+// triggered when key is released
 function onKeyUpEvent(e){
 	if(e.key.toLowerCase() == "capslock") return;
 	// set key pressed at key index to false
