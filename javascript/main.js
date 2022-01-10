@@ -142,7 +142,7 @@ function update(){
 		if(keys[" "] && !itemAction){
 			if(items.length > 0){
 				for(let i = 0; i < items.length; i++){
-					let result = player.interactItem(items[i], waterwell, composter, market, soil);
+					let result = player.interactItem(items[i], waterwell, composter, soil);
 					if(result.del){
 						items[i].stackCount--;
 						if(items[i].stackCount <= 0){
@@ -155,9 +155,10 @@ function update(){
 				}
 			}
 			else {
-				let result = player.interactItem(player.item, waterwell, composter, market, soil);
+				let result = player.interactItem(player.item, waterwell, composter, soil);
 				if(result.drop != undefined) items.push(result.drop);
 			}
+			player.interactMarket(market);
 			itemAction = true;
 		}
 	}

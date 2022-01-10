@@ -19,7 +19,17 @@ class Player{
 		if(min.m > 0)this.pos.add(Vector2.multiply(min.d, min.m));
 	}
 	
-	interactItem(item, waterwell, composter, market, soil){
+	interactMarket(market){
+		// market
+		let marketDist = Vector2.distance(this.getMidPoint(), market.getMidPoint());
+		if(marketDist < market.range){
+			GUI_Market[0].enabled = true;
+			return {act:true,del:false,drop:undefined};
+		}
+		return {act:false,del:false,drop:undefined};
+	}
+
+	interactItem(item, waterwell, composter, soil){
 		
 		if(keys["shift"] && this.item.id != 0){
 			let dropped = this.item.clone();
@@ -37,16 +47,7 @@ class Player{
 			this.item.stackCount = 1;
 			
 			return {act:true,del:true,drop:undefined};
-		}
-		
-		// market
-		let marketDist = Vector2.distance(this.getMidPoint(), market.getMidPoint());
-		if(marketDist < market.range){
-			GUI_Market[0].enabled = true;
-			return {act:false,del:false,drop:undefined};
-		}
-
-		if(this.item.id != 0) {
+		} else if(this.item.id != 0) {
 			// do actions for custom items firstChild
 			
 			let id = this.item.id;
