@@ -37,10 +37,7 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 	TODO:
 	- Score
 	- Currency
-	  - Buy items
 	  - Score Bonus
-	- Market
-	  - Functionality
 	- Starting Mechanics
 	  - Get starting items
 	  - Tutorial?
@@ -53,11 +50,6 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 	- Graphics (low priority)
 	- Sfx (probably random generated sfx)
 	- Music (piss off, i cant make music, lowest priority)
-	
-	Notes:
-	- Might import PlayerGUI.js
-	  - Code is an utter POS
-	  - Help Menu
 
 */
 
