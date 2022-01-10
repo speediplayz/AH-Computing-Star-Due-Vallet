@@ -75,6 +75,8 @@ class Player{
 					}
 				}
 				this.item.uses--;
+				let particle = new Particle(this.getMidPoint(), canRange, new Vector2(1, canRange/4), 0.75, 2, "rgb(0,0,255,0.25)", 625);
+				particles.push(particle);
 				// return result
 				return {act:true,del:false,drop:undefined};
 			}
@@ -150,6 +152,8 @@ class Player{
 			if(this.item.compostVal > 0 && compDist < composter.range){
 				// increment composter fill value
 				composter.progress += this.item.compostVal;
+				let particle = new Particle(composter.getMidPoint(), 100, new Vector2(2.5, 12.5), 0.75, 2, "rgb(255,255,255,0.25)", 625);
+				particles.push(particle);
 				// remove item being composted
 				this.item = Item.getItemByID(0);
 				if(composter.progress.toFixed(2) >= 1) {

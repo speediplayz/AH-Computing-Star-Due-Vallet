@@ -25,6 +25,7 @@ let market = new Building(new Vector2(256, 16), new Vector2(128, 64), 80);
 let soil = [];
 let colliders = [];
 let items = [];
+let particles = [];
 
 // game variables
 let moveSpeed = 4;
@@ -88,7 +89,9 @@ function setup(){
 	// temporary items for testing
 	items.push(Item.getItemByID(9).cloneAt(new Vector2(104, 136)));
 	items.push(Item.getItemByID(11).cloneAt(new Vector2(184, 152)));
-	items.push(Item.getItemByID(14).cloneAt(new Vector2(136, 136)));
+	items.push(Item.getItemByID(12).cloneAt(new Vector2(136, 136)));
+	items.push(Item.getItemByID(13).cloneAt(new Vector2(168, 136)));
+	items.push(Item.getItemByID(14).cloneAt(new Vector2(200, 136)));
 	items.push(Item.getItemByID(15).cloneAt(new Vector2(104, 168)));
 	items[0].stackCount = 10;
 	items[1].stackCount = 10;
@@ -185,6 +188,17 @@ function update(){
 	composter.draw(ctx, util_composter[Math.floor(composter.progress*5)]);
 	market.draw(ctx, util_market);
 	player.draw(ctx);
+
+	for(let i = 0; i < particles.length; i++){
+		if(particles[i].particles.length == 0){
+			particles.splice(i, 1);
+			i--;
+		}
+		if(i >= 0){
+			particles[i].update();
+			particles[i].draw(ctx);
+		}
+	}
 	
 	/*
 		end temp code

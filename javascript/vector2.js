@@ -103,4 +103,5 @@ class Vector2{
 	static angleToRadian(a) { return a * Math.PI / 180; }
 	static radianToAngle(a) { return a * 180 / Math.PI; }
 	static midPoint(v1) { return new Vector2(v1.x/2, v1.y/2); }
+	static random(len) { return Vector2.fromPolar(len==null?1:len, Math.random() * 2 * Math.PI); }
 }
