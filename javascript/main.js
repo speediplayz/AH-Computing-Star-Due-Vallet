@@ -18,7 +18,7 @@ let itemAction = false;
 let keys = [];
 
 // object variables
-let player = new Player(new Vector2(128, 128), new Vector2(32, 32));
+    player = new Player(new Vector2(128, 128), new Vector2(32, 32));
 let waterwell = new Building(new Vector2(16, 128), new Vector2(64, 64), 70);
 let composter = new Building(new Vector2(128, 16), new Vector2(64, 64), 70);
 let market = new Building(new Vector2(256, 16), new Vector2(128, 64), 80);
@@ -83,7 +83,7 @@ function setup(){
 	
 	// initial values for stuff
 	keys["shift"] = false;
-	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false;
+	closeMarket();
 	
 	// temporary items for testing
 	items.push(Item.getItemByID(9).cloneAt(new Vector2(104, 136)));
@@ -125,7 +125,7 @@ function start(){
 
 function update(){
 	// user input
-	if(keys["escape"]) for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false;
+	if(keys["escape"]) closeMarket();
 	if(!marketEnabled()){
 		if(keys["w"]) player.move(new Vector2(0, -moveSpeed));
 		if(keys["s"]) player.move(new Vector2(0,  moveSpeed));
@@ -201,6 +201,10 @@ function marketEnabled(){
 
 	for(let i = 0; i < GUI_Market.length; i++) if(GUI_Market[i].enabled) return true;
 	return false;
+}
+
+function closeMarket(){
+	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false;
 }
 
 function aabbOverlap(ap, ab, bp, bb){

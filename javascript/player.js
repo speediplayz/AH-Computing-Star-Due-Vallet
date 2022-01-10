@@ -29,13 +29,6 @@ class Player{
 			return {act:true,del:false,drop:dropped};
 		}
 		
-		// market
-		let marketDist = Vector2.distance(this.getMidPoint(), market.getMidPoint());
-		if(marketDist < market.range){
-			GUI_Market[0].enabled = true;
-			return {act:true,del:false,drop:undefined};
-		}
-		
 		let itemDist = Vector2.distance(this.getMidPoint(), item.getMidPoint());
 		if(itemDist < 16 && this.item.id == 0) { // 16 is good range for an item
 			
@@ -44,7 +37,16 @@ class Player{
 			this.item.stackCount = 1;
 			
 			return {act:true,del:true,drop:undefined};
-		} else if(this.item.id != 0) {
+		}
+		
+		// market
+		let marketDist = Vector2.distance(this.getMidPoint(), market.getMidPoint());
+		if(marketDist < market.range){
+			GUI_Market[0].enabled = true;
+			return {act:false,del:false,drop:undefined};
+		}
+
+		if(this.item.id != 0) {
 			// do actions for custom items firstChild
 			
 			let id = this.item.id;
