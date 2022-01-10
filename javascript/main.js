@@ -41,6 +41,9 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 	  - Score Bonus
 	- Starting Mechanics
 	  - Get starting items
+	    - watering can 1
+		- 4 plots of soil
+		- 4 barley seeds
 	  - Tutorial?
 	- Place display
 	  - See where soil is going to be placed
@@ -210,6 +213,7 @@ function update(){
 	
 	// draw GUI
 	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].draw();
+	for(let i = 0; i < GUI_Player.length; i++) GUI_Player[i].draw();
 }
 
 // check if any of the market GUIs are enabled

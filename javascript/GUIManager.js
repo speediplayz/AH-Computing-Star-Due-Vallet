@@ -158,6 +158,14 @@ let GUI_Market = [
 	)
 ];
 
+// player GUI
+let GUI_Player =
+[
+	new Picture(ctx, new Rect(ctx, new Vector2(8, 8), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/gui/icon_score.png"),
+	new Picture(ctx, new Rect(ctx, new Vector2(8, 72), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/gui/icon_coin.png"),
+	new Picture(ctx, new Rect(ctx, new Vector2(8, 136), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/gui/icon_item.png")
+];
+
 // page 1 buy, sell, next page
 GUI_Market[0].elements[0].onclick.push(()=>{ for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
 GUI_Market[0].elements[1].onclick.push(()=>{ player.coins += player.item.value; player.item = Item.getItemByID(0); for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });

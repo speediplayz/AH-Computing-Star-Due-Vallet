@@ -33,6 +33,12 @@ let tile_5_3 = loadImage("img/item/tilemap/tile_5_3.png");
 
 let tile_null = loadImage("img/item/tilemap/tile_null.png");
 
+// gui
+
+let icon_coin = loadImage("img/gui/icon_coin.png");
+let icon_item = loadImage("img/gui/icon_item.png");
+let icon_score = loadImage("img/gui/icon_score.png");
+
 // util
 
 let util_waterwell = loadImage("img/util/util_waterwell.png");
