@@ -130,7 +130,7 @@ class Picture{
 	constructor(ctx, rect, url){
 		this.c = ctx;
 		this.rect = rect;
-		this.url = "file:\\\\\\" + url;
+		this.url = /*"file:\\\\\\" +*/ url;
 		this.enabled = false;
 		this.img = new Image(this.rect.size.x, this.rect.size.y);
 		this.img.src = this.url;
@@ -218,7 +218,7 @@ function mouseDownEvent(e){
 			}
 			
 			hovered[i].state = 2;
-			hovered[i].draw();
+			// hovered[i].draw();
 			pressed.push(hovered[i]);
 		} else if(!hover){
 			let j = pressed.indexOf(hovered[i]);
@@ -255,7 +255,7 @@ function mouseUpEvent(e){
 		
 		if(hover){
 			pressed[i].state = 1;
-			pressed[i].draw();
+			// pressed[i].draw();
 			pressed.splice(i, 1);
 		}
 	}
@@ -284,7 +284,7 @@ function mouseMoveEvent(e){
 			hovered.splice(j, 1);
 			buttons[i].state = 0;
 		}
-		buttons[i].draw();
+		// buttons[i].draw();
 	}
 	
 	// sliders

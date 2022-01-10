@@ -4,7 +4,7 @@ let ctx = document.getElementById("canv").getContext("2d");
 // 0, 112, 127
 
 let GUI_Market = [
-	new Display
+	new Display // tools
 	(
 		ctx,
 		new Rect(ctx, new Vector2(24, 24), new Vector2(592, 592), "rgb(0,123,140)", true, 4, "rgb(0,0,0)"),
@@ -27,35 +27,35 @@ let GUI_Market = [
 			( // watering can 1
 				ctx,
 				new Rect(ctx, new Vector2(12, 12), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(28, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(12).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // watering can 2
 				ctx,
 				new Rect(ctx, new Vector2(204, 12), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(28, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(13).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // watering can 3
 				ctx,
 				new Rect(ctx, new Vector2(396, 12), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(28, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(14).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // trowel
 				ctx,
 				new Rect(ctx, new Vector2(108, 204), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(28, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(15).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // soil
 				ctx,
 				new Rect(ctx, new Vector2(300, 204), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(28, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(11).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
@@ -72,10 +72,15 @@ let GUI_Market = [
 				new Text(ctx, new Rect(ctx, new Vector2(18, 45), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), ">", "96px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
-			new Text(ctx, new Rect(ctx, new Vector2(272, 531), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "1 / 2", "30px helvetica")
+			new Text(ctx, new Rect(ctx, new Vector2(272, 531), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "1 / 2", "30px helvetica"),
+			new Picture(ctx, new Rect(ctx, new Vector2(40, 32), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_5_1.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(232, 32), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_5_2.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(424, 32), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_5_3.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(136, 224), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_0_4.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(328, 224), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_5_0.png")
 		]
 	),
-	new Display
+	new Display // crops
 	(
 		ctx,
 		new Rect(ctx, new Vector2(24, 24), new Vector2(592, 592), "rgb(0,123,140)", true, 4, "rgb(0,0,0)"),
@@ -98,35 +103,35 @@ let GUI_Market = [
 			( // potato
 				ctx,
 				new Rect(ctx, new Vector2(12, 12), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(38, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(1).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // carrot
 				ctx,
 				new Rect(ctx, new Vector2(204, 12), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(38, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(3).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // barley
 				ctx,
 				new Rect(ctx, new Vector2(396, 12), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(38, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(5).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // tomato
 				ctx,
 				new Rect(ctx, new Vector2(108, 204), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(38, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(7).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
 			( // rock
 				ctx,
 				new Rect(ctx, new Vector2(300, 204), new Vector2(184, 184), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"),
-				new Text(ctx, new Rect(ctx, new Vector2(0, 0), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "", ""),
+				new Text(ctx, new Rect(ctx, new Vector2(38, 150), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), Item.getItemByID(9).cost + " Coins", "32px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
 			new Button
@@ -143,7 +148,12 @@ let GUI_Market = [
 				new Text(ctx, new Rect(ctx, new Vector2(18, 45), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), ">", "96px helvetica"),
 				"rgb(200,200,200)", "rgb(180,180,180)", "rgb(160,160,160)"
 			),
-			new Text(ctx, new Rect(ctx, new Vector2(272, 531), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "2 / 2", "30px helvetica")
+			new Text(ctx, new Rect(ctx, new Vector2(272, 531), new Vector2(0, 0), "rgb(0,0,0)", false, 0, "rgb(0,0,0)"), "2 / 2", "30px helvetica"),
+			new Picture(ctx, new Rect(ctx, new Vector2(40, 32), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_0_0.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(232, 32), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_1_0.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(424, 32), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_2_0.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(136, 224), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_3_0.png"),
+			new Picture(ctx, new Rect(ctx, new Vector2(328, 224), new Vector2(128, 128), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_4_0.png")
 		]
 	)
 ];
