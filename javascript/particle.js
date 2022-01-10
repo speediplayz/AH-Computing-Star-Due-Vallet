@@ -26,9 +26,8 @@ class Particle{
                 this.particles.splice(i, 1);
                 i--;
             }
-            p.pos = p.pos.add(p.vel);
+            p.pos.add(p.vel)
             p.vel.multiply(p.drag);
-            this.particles[i] = p;
         }
     }
 
