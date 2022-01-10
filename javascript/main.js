@@ -87,7 +87,7 @@ function setup(){
 	
 	// temporary items for testing
 	items.push(Item.getItemByID(9).cloneAt(new Vector2(104, 136)));
-	items.push(Item.getItemByID(11).cloneAt(new Vector2(192, 160)));
+	items.push(Item.getItemByID(11).cloneAt(new Vector2(184, 152)));
 	items.push(Item.getItemByID(14).cloneAt(new Vector2(136, 136)));
 	items.push(Item.getItemByID(15).cloneAt(new Vector2(104, 168)));
 	items[0].stackCount = 10;
