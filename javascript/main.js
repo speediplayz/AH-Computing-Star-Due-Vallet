@@ -37,20 +37,12 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 
 	TODO:
 	- Score
-	- Currency
-	  - Score Bonus
 	- Starting Mechanics
 	  - Get starting items
 	    - watering can 1
 		- 4 plots of soil
 		- 4 barley seeds
 	  - Tutorial?
-	- Place display
-	  - See where soil is going to be placed
-	  - Some sort of outline
-	- GUI
-	  - Player coins
-	  - Player item
 	- Graphics (low priority)
 	- Sfx (probably random generated sfx)
 	- Music (piss off, i cant make music, lowest priority)
@@ -195,6 +187,13 @@ function update(){
 
 	// draw player
 	player.draw(ctx);
+
+	// draw soil outline
+	if(player.item.id == 11){
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = "rgb(0,255,0)";
+		ctx.strokeRect(player.pos.x, player.pos.y, 32, 32);
+	}
 
 	// draw and update particles
 	for(let i = 0; i < particles.length; i++){
