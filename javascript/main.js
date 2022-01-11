@@ -211,7 +211,14 @@ function update(){
 	// restore canvas to default
 	ctx.restore();
 	
-	// draw GUI
+	// update and draw GUI
+	GUI_Player[3].value = player.score;
+	GUI_Player[4].value = player.coins;
+
+	GUI_Player[5].url = Item.getItemImage(player.item.id).src;
+	GUI_Player[5].reloadImage();
+	GUI_Player[5].enabled = player.item.id != 0;
+
 	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].draw();
 	if(!marketEnabled()) for(let i = 0; i < GUI_Player.length; i++) GUI_Player[i].draw();
 }

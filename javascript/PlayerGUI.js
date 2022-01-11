@@ -140,6 +140,14 @@ class Picture{
 		}
 	}
 	
+	reloadImage(){
+		this.img = new Image(this.rect.size.x, this.rect.size.y);
+		this.img.src = this.url;
+		this.img.onload = async() => {
+			this.draw();
+		}
+	}
+
 	draw(){
 		if(!this.enabled) return;
 		if(this.img.src != ""){

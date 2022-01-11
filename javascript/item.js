@@ -23,7 +23,7 @@ class Item{
 
 	// draw item to screen
 	draw(c){
-		c.drawImage(this.#getItemImage(), this.pos.x, this.pos.y);
+		c.drawImage(Item.getItemImage(this.id), this.pos.x, this.pos.y);
 	}
 	
 	// return a duplicate item
@@ -46,9 +46,9 @@ class Item{
 		return new Vector2(this.pos.x + this.size.x/2, this.pos.y + this.size.y/2);
 	}
 	
-	// private function to get render image
-	#getItemImage(){
-		switch(this.id){
+	// get render image
+	static getItemImage(id){
+		switch(id){
 			case  0: return tile_null;
 			case  1: return tile_0_0;
 			case  2: return tile_0_3;

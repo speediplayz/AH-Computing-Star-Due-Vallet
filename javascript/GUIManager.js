@@ -163,7 +163,10 @@ let GUI_Player =
 [
 	new Picture(ctx, new Rect(ctx, new Vector2(8, 8), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/gui/icon_score.png"),
 	new Picture(ctx, new Rect(ctx, new Vector2(8, 72), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/gui/icon_coin.png"),
-	new Picture(ctx, new Rect(ctx, new Vector2(8, 136), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/gui/icon_item.png")
+	new Picture(ctx, new Rect(ctx, new Vector2(8, 136), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/gui/icon_item.png"),
+	new Text(ctx, new Rect(ctx, new Vector2(90, 12), new Vector2(0, 0), "rgb(255,255,255)", false, 0, "rgb(0,0,0)"), "0", "64px helvetica"),
+	new Text(ctx, new Rect(ctx, new Vector2(90, 76), new Vector2(0, 0), "rgb(255,255,255)", false, 0, "rgb(0,0,0)"), "0", "64px helvetica"),
+	new Picture(ctx, new Rect(ctx, new Vector2(72, 136), new Vector2(64, 64), "rgb(0,0,0)", true, 4, "rgb(0,0,0)"), "img/item/tilemap/tile_null.png")
 ];
 
 // page 1 buy, sell, next page

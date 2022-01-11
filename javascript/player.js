@@ -3,6 +3,7 @@ class Player{
 		this.pos = pos;
 		this.size = size;
 		this.item = Item.getItemByID(0);
+		this.score = 0;
 		this.coins = 0;
 	}
 
