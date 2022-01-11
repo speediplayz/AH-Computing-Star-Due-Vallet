@@ -8,16 +8,19 @@ class Player{
 	}
 
 	collide(coll){
+		// updated player bounds for dynamic feel
+		let this_pos = new Vector2(this.pos.x + 8, this.pos.y + 14);
+		let this_size = new Vector2(16, 16);
 		// deltas in every direction
-		let dt = {m:this.pos.y + this.size.y - coll.pos.y,d:new Vector2( 0, -1)};
-		let db = {m:coll.pos.y + coll.size.y - this.pos.y,d:new Vector2( 0,  1)};
-		let dl = {m:this.pos.x + this.size.x - coll.pos.x,d:new Vector2(-1,  0)};
-		let dr = {m:coll.pos.x + coll.size.x - this.pos.x,d:new Vector2( 1,  0)};
+		let dt = {m:this_pos.y + this_size.y - coll.pos.y,d:new Vector2( 0, -1)};
+		let db = {m:coll.pos.y + coll.size.y - this_pos.y,d:new Vector2( 0,  1)};
+		let dl = {m:this_pos.x + this_size.x - coll.pos.x,d:new Vector2(-1,  0)};
+		let dr = {m:coll.pos.x + coll.size.x - this_pos.x,d:new Vector2( 1,  0)};
 		
 		// smallest delta
 		let min = dt.m < db.m && dt.m < dl.m && dt.m < dr.m ? dt : db.m < dl.m && db.m < dr.m ? db : dl.m < dr.m ? dl : dr;
 		// if delta is > 0, offset player in correct direction
-		if(min.m > 0)this.pos.add(Vector2.multiply(min.d, min.m));
+		if(min.m > 0)this.pos.add(Vector2.multiply(min.d, min.m + 1));
 	}
 	
 	interactMarket(market){
@@ -217,6 +220,7 @@ class Player{
 		c.strokeStyle = "black";
 		c.strokeRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
 		c.strokeRect(this.getMidPoint().x-2, this.getMidPoint().y-2, 4, 4);
+		c.strokeRect(this.pos.x+8, this.pos.y + 14, 16, 16);
 	}
 	
 	// private function to find closest existing soil
