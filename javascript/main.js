@@ -192,7 +192,14 @@ function update(){
 	if(player.item.id == 11){
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = "rgb(0,255,0)";
-		ctx.strokeRect(player.pos.x, player.pos.y, 32, 32);
+		let pos = player.pos.clone();
+
+		if(keys["capslock"]){
+			let mid = player.getMidPoint();
+			pos.x = mid.x - mid.x % 32;
+			pos.y = mid.y - mid.y % 32;
+		}
+		ctx.strokeRect(pos.x, pos.y, 32, 32);
 	}
 
 	// draw and update particles
@@ -218,6 +225,7 @@ function update(){
 	GUI_Player[5].reloadImage();
 	GUI_Player[5].enabled = player.item.id != 0;
 
+	if(marketEnabled()) GUI_Player[5].enabled = false;
 	for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].draw();
 	if(!marketEnabled()) for(let i = 0; i < GUI_Player.length; i++) GUI_Player[i].draw();
 }
