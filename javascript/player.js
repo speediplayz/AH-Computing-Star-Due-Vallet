@@ -120,6 +120,11 @@ class Player{
 					plotPos.x = mid.x - mid.x % 32;
 					plotPos.y = mid.y - mid.y % 32;
 				}
+
+				// clamp position to interactable zone
+				plotPos.x = plotPos.x < 96 ? 96 : plotPos.x > 512 ? 512 : plotPos.x;
+				plotPos.y = plotPos.y < 96 ? 96 : plotPos.y > 512 ? 512 : plotPos.y;
+
 				let overlaps = false;
 				// check for overlap with other soil plots
 				for(let i = 0; i < soil.length; i++){

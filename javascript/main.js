@@ -83,6 +83,8 @@ function setup(){
 	items.push(Item.getItemByID(15).cloneAt(new Vector2(104, 168)));
 	items[0].stackCount = 10;
 	items[1].stackCount = 10;
+
+	items = insertionSort(items);
 	
 	// makes images look bad when true
 	ctx.imageSmoothingEnabled = false;
@@ -123,34 +125,30 @@ function update(){
 		if(keys["s"]) player.move(new Vector2(0,  moveSpeed));
 		if(keys["a"]) player.move(new Vector2(-moveSpeed, 0));
 		if(keys["d"]) player.move(new Vector2( moveSpeed, 0));
-		
+
 		// i dont know what the hell this is
 		// but it caused me so many problems
 		// and i spent probably over an hour
 		// dealing with bugs related to this
 		if(keys[" "] && !itemAction){
-			if(items.length > 0){
-				for(let i = 0; i < items.length; i++){
-					// result from interaction
-					let result = player.interactItem(items[i], waterwell, composter, soil);
-					if(result.del){
-						items[i].stackCount--;
-						if(items[i].stackCount <= 0){
-							items.splice(i, 1);
-							i--;
-						}
-					}
-					if(result.drop != undefined) items.push(result.drop);
-					if(result.act) break;
-				}
-			}
-			else {
-				// result from interaction
-				let result = player.interactItem(player.item, waterwell, composter, soil);
-				if(result.drop != undefined) items.push(result.drop);
-			}
 			// interact with the market
 			player.interactMarket(market);
+			if(!marketEnabled()){
+				if(items.length > 0){
+					items = insertionSort(items);
+					let result = player.interactItem(items[0], waterwell, composter, soil);
+					if(result.del) {
+						items[0].stackCount--;
+						if(items[0].stackCount <= 0) items.splice(0, 1);
+					}
+					if(result.drop != undefined) items.push(result.drop);
+				}
+				else {
+					// result from interaction
+					let result = player.interactItem(player.item, waterwell, composter, soil);
+					if(result.drop != undefined) items.push(result.drop);
+				}
+			}
 			itemAction = true;
 		}
 	}
@@ -185,13 +183,10 @@ function update(){
 	composter.draw(ctx, util_composter[Math.floor(composter.progress*5)]);
 	market.draw(ctx, util_market);
 
-	// draw player
-	player.draw(ctx);
-
 	// draw soil outline
 	if(player.item.id == 11){
 		ctx.lineWidth = 1;
-		ctx.strokeStyle = "rgb(0,255,0)";
+		ctx.fillStyle = "rgb(0,255,0,0.1)";
 		let pos = player.pos.clone();
 
 		if(keys["capslock"]){
@@ -199,8 +194,11 @@ function update(){
 			pos.x = mid.x - mid.x % 32;
 			pos.y = mid.y - mid.y % 32;
 		}
-		ctx.strokeRect(pos.x, pos.y, 32, 32);
+		ctx.fillRect(pos.x, pos.y, 32, 32);
 	}
+
+		// draw player
+		player.draw(ctx);
 
 	// draw and update particles
 	for(let i = 0; i < particles.length; i++){
@@ -245,6 +243,30 @@ function closeMarket(){
 // standard aabb rectangle overlap detection
 function aabbOverlap(ap, ab, bp, bb){
 	return ap.x + ab.x > bp.x && ap.x < bp.x + bb.x && ap.y + ab.y > bp.y && ap.y < bp.y + bb.y;
+}
+
+// insertion sorting algorithm adapted for item object
+function insertionSort(input){
+	let arr = clone(input);
+	if(arr.length <= 1) return arr;
+	
+	for(let i = 1; i < arr.length; i++){
+		let j = i;
+		let temp = arr[i].clone();
+		let dist = Vector2.distance(player.pos, temp.pos);
+		while(j > 0 && Vector2.distance(player.pos, arr[j-1].pos) > dist){
+			arr[j] = arr[j-1];
+			j--;
+		}
+		arr[j] = temp;
+	}
+	return arr;
+}
+
+function clone(input){
+	let arr = new Array(input.length);
+	for(let i = 0; i < arr.length; i++) arr[i] = input[i];
+	return arr;
 }
 
 // triggered when key is pressed down
