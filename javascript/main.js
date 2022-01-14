@@ -252,20 +252,26 @@ function insertionSort(input){
 	
 	for(let i = 1; i < arr.length; i++){
 		let j = i;
+		// clone current element
 		let temp = arr[i].clone();
 		let dist = Vector2.distance(player.pos, temp.pos);
+		// while the previous is bigger, loop backwards
 		while(j > 0 && Vector2.distance(player.pos, arr[j-1].pos) > dist){
+			// swap current and previous elements
 			arr[j] = arr[j-1];
+			// reduce current index
 			j--;
 		}
+		// put current element at index j
 		arr[j] = temp;
 	}
 	return arr;
 }
 
+// clone an array (assuming it has a clone() method)
 function clone(input){
 	let arr = new Array(input.length);
-	for(let i = 0; i < arr.length; i++) arr[i] = input[i];
+	for(let i = 0; i < arr.length; i++) arr[i] = input[i].clone();
 	return arr;
 }
 
