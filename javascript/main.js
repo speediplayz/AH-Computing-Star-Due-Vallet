@@ -121,10 +121,14 @@ function update(){
 	// user input
 	if(keys["escape"]) closeMarket();
 	if(!marketEnabled()){
-		if(keys["w"]) player.move(new Vector2(0, -moveSpeed));
-		if(keys["s"]) player.move(new Vector2(0,  moveSpeed));
-		if(keys["a"]) player.move(new Vector2(-moveSpeed, 0));
-		if(keys["d"]) player.move(new Vector2( moveSpeed, 0));
+		player.moving = false;
+		player.state = 0;
+		if(keys["a"]) { player.move(new Vector2(-moveSpeed, 0)); player.dir = 3; }
+		if(keys["d"]) { player.move(new Vector2( moveSpeed, 0)); player.dir = 1; }
+		if(keys["w"]) { player.move(new Vector2(0, -moveSpeed)); player.dir = 0; }
+		if(keys["s"]) { player.move(new Vector2(0,  moveSpeed)); player.dir = 2; }
+
+		if(player.moving) player.steps++;
 
 		// i dont know what the hell this is
 		// but it caused me so many problems
@@ -136,12 +140,22 @@ function update(){
 			if(!marketEnabled()){
 				if(items.length > 0){
 					items = insertionSort(items);
-					let result = player.interactItem(items[0], waterwell, composter, soil);
-					if(result.del) {
-						items[0].stackCount--;
-						if(items[0].stackCount <= 0) items.splice(0, 1);
+					let dist = Vector2.distance(items[0].pos, player.pos);
+					let closest = [];
+					for(let i = 0; i < items.length; i++){
+						if(Vector2.distance(items[i].pos, player.pos) == dist) {
+							closest.push(items[i]);
+							console.log(items[i]);
+						}
 					}
-					if(result.drop != undefined) items.push(result.drop);
+					for(let i = 0; i < closest.length; i++){
+						let result = player.interactItem(closest[i], waterwell, composter, soil);
+						if(result.del) {
+							items[i].stackCount--;
+							if(items[i].stackCount <= 0) items.splice(0, 1);
+						}
+						if(result.drop != undefined) items.push(result.drop);
+					}
 				}
 				else {
 					// result from interaction

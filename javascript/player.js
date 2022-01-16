@@ -5,6 +5,13 @@ class Player{
 		this.item = Item.getItemByID(0);
 		this.score = 0;
 		this.coins = 0;
+
+		// drawing and animation
+		this.dir = 2; // 0123 - NESW
+		this.state = 0; // 012
+		this.moving = false;
+		this.steps = 0;
+		this.stepsMax = 12;
 	}
 
 	collide(coll){
@@ -217,15 +224,44 @@ class Player{
 	// move player by delta
 	move(delta){
 		this.pos.add(delta);
+		this.moving = true;
+		this.state = this.steps > this.stepsMax/2 ? 2 : 1;
+		if(this.steps >= this.stepsMax) this.steps = 0;
 	}
 	
 	// draw player to screen
 	draw(c){
+		/*
 		c.lineWidth = 1;
 		c.strokeStyle = "black";
 		c.strokeRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
 		c.strokeRect(this.getMidPoint().x-2, this.getMidPoint().y-2, 4, 4);
 		c.strokeRect(this.pos.x+8, this.pos.y + 16, 16, 16);
+		*/
+		let img;
+		switch(this.dir){
+			case 0:
+				if(this.state == 0) img = player_up_0;
+				if(this.state == 1) img = player_up_1;
+				if(this.state == 2) img = player_up_2;
+			break;
+			case 1:
+				if(this.state == 0) img = player_right_0;
+				if(this.state == 1) img = player_right_1;
+				if(this.state == 2) img = player_right_2;
+			break;
+			case 2:
+				if(this.state == 0) img = player_down_0;
+				if(this.state == 1) img = player_down_1;
+				if(this.state == 2) img = player_down_2;
+			break;
+			case 3:
+				if(this.state == 0) img = player_left_0;
+				if(this.state == 1) img = player_left_1;
+				if(this.state == 2) img = player_left_2;
+			break;
+		}
+		c.drawImage(img, this.pos.x, this.pos.y);
 	}
 	
 	// private function to find closest existing soil

@@ -50,6 +50,24 @@ let util_soil = [ loadImage("img/util/util_soil_dry.png"), loadImage("img/util/u
 
 let map_default = loadImage("img/map/map_default.png");
 
+// player
+
+let player_up_0 = loadImage("img/player/tilemap/player_up_0.png");
+let player_up_1 = loadImage("img/player/tilemap/player_up_1.png");
+let player_up_2 = loadImage("img/player/tilemap/player_up_2.png");
+
+let player_down_0 = loadImage("img/player/tilemap/player_down_0.png");
+let player_down_1 = loadImage("img/player/tilemap/player_down_1.png");
+let player_down_2 = loadImage("img/player/tilemap/player_down_2.png");
+
+let player_left_0 = loadImage("img/player/tilemap/player_left_0.png");
+let player_left_1 = loadImage("img/player/tilemap/player_left_1.png");
+let player_left_2 = loadImage("img/player/tilemap/player_left_2.png");
+
+let player_right_0 = loadImage("img/player/tilemap/player_right_0.png");
+let player_right_1 = loadImage("img/player/tilemap/player_right_1.png");
+let player_right_2 = loadImage("img/player/tilemap/player_right_2.png");
+
 // load image from directory
 function loadImage(src){
 	let image = new Image();
