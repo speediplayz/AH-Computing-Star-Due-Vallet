@@ -61,7 +61,7 @@ class Player{
 			
 			return {act:true,del:true,drop:undefined};
 		} else if(this.item.id != 0) {
-			// do actions for custom items firstChild
+			// do actions for custom items first
 			
 			let id = this.item.id;
 			
@@ -165,6 +165,7 @@ class Player{
 					soil[closestIndex].plantCrop(this.item.id);
 					// remove seed from player
 					this.item = Item.getItemByID(0);
+					this.score += 25;
 					// return result
 					return {act:true,del:false,drop:undefined};
 				}
@@ -175,6 +176,7 @@ class Player{
 			if(this.item.compostVal > 0 && compDist < composter.range){
 				// increment composter fill value
 				composter.progress += this.item.compostVal;
+				player.score += 50;
 				let particle = new Particle(composter.getMidPoint(), 100, new Vector2(2.5, 12.5), 0.75, 2, "rgb(255,255,255,0.25)", 625);
 				particles.push(particle);
 				// remove item being composted
@@ -184,6 +186,7 @@ class Player{
 					composter.progress = 0
 					// give the player soil
 					this.item = Item.getItemByID(11);
+					player.score += 50;
 				}
 				// return result
 				return {act:true,del:false,drop:undefined};
@@ -199,6 +202,7 @@ class Player{
 				if(plot.grown){
 					// give player produce
 					this.item = Item.getItemByID(id);
+					this.score += 50;
 					plot.plantedID = -1;
 					plot.grown = false;
 					plot.watered = false;

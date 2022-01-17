@@ -27,6 +27,7 @@ let soil = [];
 let colliders = [];
 let items = [];
 let particles = [];
+let timeBonus = new Timer();
 
 // game variables
 let moveSpeed = 4;
@@ -36,7 +37,6 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 /*
 
 	TODO:
-	- Score
 	- Starting Mechanics
 	  - Get starting items
 	    - watering can 1
@@ -88,6 +88,12 @@ function setup(){
 	
 	// makes images look bad when true
 	ctx.imageSmoothingEnabled = false;
+	
+	// time bonus timer
+	timeBonus.setInterval(60000);
+	timeBonus.addInteractable(player);
+	timeBonus.onElapsed = (timer)=>{timer.getInteractable(0).score += 100;};
+	timeBonus.start();
 	
 	start();
 }
@@ -145,7 +151,6 @@ function update(){
 					for(let i = 0; i < items.length; i++){
 						if(Vector2.distance(items[i].pos, player.pos) == dist) {
 							closest.push(items[i]);
-							console.log(items[i]);
 						}
 					}
 					for(let i = 0; i < closest.length; i++){
