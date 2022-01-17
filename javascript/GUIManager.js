@@ -170,14 +170,23 @@ let GUI_Player =
 ];
 
 // page 1 buy, sell, next page
-GUI_Market[0].elements[0].onclick.push(()=>{ for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
-GUI_Market[0].elements[1].onclick.push(()=>{ player.coins += player.item.value; player.score += 25; player.item = Item.getItemByID(0); for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
+GUI_Market[0].elements[0].onclick.push(closePages);
+GUI_Market[0].elements[1].onclick.push(sellItem);
 GUI_Market[0].elements[8].onclick.push(()=>{ GUI_Market[0].enabled = false; GUI_Market[1].enabled = true; });
 
 // page 2 buy, sell, prev page
-GUI_Market[1].elements[0].onclick.push(()=>{ for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
-GUI_Market[1].elements[1].onclick.push(()=>{ player.coins += player.item.value; player.score += 25; player.item = Item.getItemByID(0); for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; });
+GUI_Market[1].elements[0].onclick.push(closePages);
+GUI_Market[1].elements[1].onclick.push(sellItem);
 GUI_Market[1].elements[7].onclick.push(()=>{ GUI_Market[0].enabled = true; GUI_Market[1].enabled = false; });
+
+/*
+	Because of a stupid decision I made
+	a year ago when making the GUI class,
+	I can't provide any parameters to the
+	onclick events, meaning that I can't
+	easily make the code in the following
+	buttons into 1 function with a param.
+*/
 
 // page 1 button events
 GUI_Market[0].elements[2].onclick.push(()=>{ let item = Item.getItemByID(12); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); player.score += 25; closeMarket(); } });
@@ -192,3 +201,9 @@ GUI_Market[1].elements[3].onclick.push(()=>{ let item = Item.getItemByID(3); if(
 GUI_Market[1].elements[4].onclick.push(()=>{ let item = Item.getItemByID(5); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); player.score += 25; closeMarket(); } });
 GUI_Market[1].elements[5].onclick.push(()=>{ let item = Item.getItemByID(7); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); player.score += 25; closeMarket(); } });
 GUI_Market[1].elements[6].onclick.push(()=>{ let item = Item.getItemByID(9); if(player.item.id == 0 && player.coins >= item.cost) { player.coins -= item.cost; player.item = item.clone(); player.score += 25; closeMarket(); } });
+
+// close button event function
+function closePages() { for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; }
+
+// sell button event function
+function sellItem() { player.coins += player.item.value; player.score += 25; player.item = Item.getItemByID(0); for(let i = 0; i < GUI_Market.length; i++) GUI_Market[i].enabled = false; }

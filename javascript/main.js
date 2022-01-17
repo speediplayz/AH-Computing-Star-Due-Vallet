@@ -36,6 +36,26 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 
 /*
 
+	Don't pay any attention to the file
+	called PlayerGUI.js, it is an old class
+	library that I made for the purpose of
+	small 2D game projects which required
+	some form of GUI for the player. After
+	looking at it for more than 2 seconds
+	it is very easy to tell that it was
+	coded poorly, and I need to recode it
+	with things like inheritance and in
+	general a smarter approach.
+
+	Vector2.js is a 2D vector class that I
+	have recursively and extensively worked
+	on to the point where it suits me and
+	my specific style of coding and language
+
+*/
+
+/*
+
 	TODO:
 	- Starting Mechanics
 	  - Get starting items
@@ -47,18 +67,6 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 	- Sfx (probably random generated sfx)
 	- Music (piss off, i cant make music, lowest priority)
 
-*/
-
-/*
-	
-	Things Ive Re-used:
-	- main.js (setup, canvas and game state variables)
-	  - I have a template folder for initial html-js project setup
-	- vector2.js (didnt feel like re-coding it)
-	  - I have a custom library folder with alot of different things
-	- PlayerGUI.js (made it so i had a "universal" GUI class)
-	  - I hate the code but i didnt really have any other ideas
-	
 */
 
 // called when the window is done loading everything
