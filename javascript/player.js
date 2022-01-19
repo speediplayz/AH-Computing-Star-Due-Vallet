@@ -222,7 +222,7 @@ class Player{
 	
 	// get mid point of rect
 	getMidPoint(){
-		return new Vector2(this.pos.x + this.size.x/2, this.pos.y + this.size.y/2);
+		return new Vector2(this.pos.x + this.size.x/2, this.pos.y + this.size.y/2 + 8);
 	}
 	
 	// move player by delta

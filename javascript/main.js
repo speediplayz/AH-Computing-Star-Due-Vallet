@@ -151,6 +151,7 @@ function update(){
 		if(keys[" "] && !itemAction){
 			// interact with the market
 			player.interactMarket(market);
+			console.log("t");
 			if(!marketEnabled()){
 				if(items.length > 0){
 					items = insertionSort(items);
@@ -168,6 +169,7 @@ function update(){
 							if(items[i].stackCount <= 0) items.splice(0, 1);
 						}
 						if(result.drop != undefined) items.push(result.drop);
+						if(result.act) break;
 					}
 				}
 				else {
@@ -281,7 +283,7 @@ function insertionSort(input){
 		let j = i;
 		// clone current element
 		let temp = arr[i].clone();
-		let dist = Vector2.distance(player.pos, temp.pos);
+		let dist = Vector2.distance(player.getMidPoint(), temp.getMidPoint());
 		// while the previous is bigger, loop backwards
 		while(j > 0 && Vector2.distance(player.pos, arr[j-1].pos) > dist){
 			// swap current and previous elements
