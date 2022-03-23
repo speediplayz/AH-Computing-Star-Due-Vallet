@@ -152,6 +152,10 @@ class Player{
 					// add plot to soil list
 					soil.push(plot);
 
+					// spawn particles
+					let particle = new Particle(plot.getMidPoint(), 16, new Vector2(0.5, 2), 0.75, 2, "rgb(100,70,65,0.5)", 625);
+					particles.push(particle);
+
 					playSound("place");
 					// return result
 					return {act:true,del:false,drop:undefined};
@@ -172,6 +176,9 @@ class Player{
 					// remove seed from player
 					this.item = Item.getItemByID(0);
 					this.score += 25;
+					// spawn particles
+					let particle = new Particle(soil[closestIndex].getMidPoint(), 8, new Vector2(0.25, 2.5), 0.75, 2, "rgb(255,255,255,0.125)", 625);
+					particles.push(particle);
 
 					playSound("plant");
 					// return result
@@ -185,6 +192,7 @@ class Player{
 				// increment composter fill value
 				composter.progress += this.item.compostVal;
 				player.score += 50;
+				// spawn particles
 				let particle = new Particle(composter.getMidPoint(), 100, new Vector2(2.5, 12.5), 0.75, 2, "rgb(255,255,255,0.25)", 625);
 				particles.push(particle);
 
@@ -221,6 +229,9 @@ class Player{
 					// chance of having double seeds
 					seed.stackCount = Math.random() < 0.33 ? 2 : 1;
 					seed.pos = Vector2.add(plot.pos, new Vector2(8, 8));
+					// spawn particles
+					let particle = new Particle(soil[closestIndex].getMidPoint(), 8, new Vector2(0.25, 2.5), 0.75, 2, "rgb(255,255,255,0.125)", 625);
+					particles.push(particle);
 
 					playSound("plant");
 					// return result
@@ -243,6 +254,10 @@ class Player{
 		this.moving = true;
 		this.state = this.steps > this.stepsMax/2 ? 2 : 1;
 		if(this.steps >= this.stepsMax) this.steps = 0;
+
+		// spawn particles
+		let particle = new Particle(this.getMidPoint(), 2, new Vector2(0.25, 2), 0.75, 2, "rgb(255,235,160,0.1)", 625 + Math.floor(Math.random() * 400) - 100);
+		particles.push(particle);
 	}
 	
 	// draw player to screen
