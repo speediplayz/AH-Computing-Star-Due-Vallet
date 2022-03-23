@@ -94,6 +94,8 @@ class Player{
 				this.item.uses--;
 				let particle = new Particle(this.getMidPoint(), canRange, new Vector2(1, canRange/4), 0.75, 2, "rgb(0,0,255,0.25)", 625);
 				particles.push(particle);
+
+				playSound("water");
 				// return result
 				return {act:true,del:false,drop:undefined};
 			}
@@ -113,6 +115,8 @@ class Player{
 					this.item = Item.getItemByID(0);
 					// give player soil
 					this.item = Item.getItemByID(11);
+
+					playSound("place");
 					// drop players current item
 					return {act:true,del:false,drop:dropped};
 				}
@@ -147,6 +151,8 @@ class Player{
 					let plot = new Soil(plotPos, new Vector2(32, 32), 24);
 					// add plot to soil list
 					soil.push(plot);
+
+					playSound("place");
 					// return result
 					return {act:true,del:false,drop:undefined};
 				}
@@ -166,6 +172,8 @@ class Player{
 					// remove seed from player
 					this.item = Item.getItemByID(0);
 					this.score += 25;
+
+					playSound("plant");
 					// return result
 					return {act:true,del:false,drop:undefined};
 				}
@@ -179,6 +187,8 @@ class Player{
 				player.score += 50;
 				let particle = new Particle(composter.getMidPoint(), 100, new Vector2(2.5, 12.5), 0.75, 2, "rgb(255,255,255,0.25)", 625);
 				particles.push(particle);
+
+				playSound("place");
 				// remove item being composted
 				this.item = Item.getItemByID(0);
 				if(composter.progress.toFixed(2) >= 1) {
@@ -211,6 +221,8 @@ class Player{
 					// chance of having double seeds
 					seed.stackCount = Math.random() < 0.33 ? 2 : 1;
 					seed.pos = Vector2.add(plot.pos, new Vector2(8, 8));
+
+					playSound("plant");
 					// return result
 					return {act:true,del:false,drop:seed};
 				}

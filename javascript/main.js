@@ -54,21 +54,6 @@ let camSize = new Vector2(canvas.width/scale.x, canvas.height/scale.y);
 
 */
 
-/*
-
-	TODO:
-	- Starting Mechanics
-	  - Get starting items
-	    - watering can 1
-		- 4 plots of soil
-		- 4 barley seeds
-	  - Tutorial?
-	- Graphics (low priority)
-	- Sfx (probably random generated sfx)
-	- Music (piss off, i cant make music, lowest priority)
-
-*/
-
 // called when the window is done loading everything
 function setup(){
 	
@@ -83,6 +68,7 @@ function setup(){
 	closeMarket();
 	
 	// temporary items for testing
+	/*
 	items.push(Item.getItemByID(9).cloneAt(new Vector2(104, 136)));
 	items.push(Item.getItemByID(11).cloneAt(new Vector2(184, 152)));
 	items.push(Item.getItemByID(12).cloneAt(new Vector2(136, 136)));
@@ -91,6 +77,16 @@ function setup(){
 	items.push(Item.getItemByID(15).cloneAt(new Vector2(104, 168)));
 	items[0].stackCount = 10;
 	items[1].stackCount = 10;
+	*/
+
+	soil.push(new Soil(new Vector2(160, 128), new Vector2(32, 32), 24));
+	soil.push(new Soil(new Vector2(160, 160), new Vector2(32, 32), 24));
+	soil.push(new Soil(new Vector2(224, 128), new Vector2(32, 32), 24));
+	soil.push(new Soil(new Vector2(224, 160), new Vector2(32, 32), 24));
+
+	items.push(Item.getItemByID(12).cloneAt(new Vector2(200, 232)));
+	items.push(Item.getItemByID( 5).cloneAt(new Vector2(136, 168)));
+	items[1].stackCount = 4;
 
 	items = insertionSort(items);
 	
@@ -151,7 +147,6 @@ function update(){
 		if(keys[" "] && !itemAction){
 			// interact with the market
 			player.interactMarket(market);
-			console.log("t");
 			if(!marketEnabled()){
 				if(items.length > 0){
 					items = insertionSort(items);
