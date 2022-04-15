@@ -230,7 +230,7 @@ class Player{
 					seed.stackCount = Math.random() < 0.33 ? 2 : 1;
 					seed.pos = Vector2.add(plot.pos, new Vector2(8, 8));
 					// spawn particles
-					let particle = new Particle(soil[closestIndex].getMidPoint(), 8, new Vector2(0.25, 2.5), 0.75, 2, "rgb(255,255,255,0.125)", 625);
+					let particle = new Particle(soil[result.index].getMidPoint(), 8, new Vector2(0.25, 2.5), 0.75, 2, "rgb(255,255,255,0.125)", 625);
 					particles.push(particle);
 
 					playSound("plant");
